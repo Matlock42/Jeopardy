@@ -12,11 +12,7 @@
 **********************************/
 game::game()
 {
-<<<<<<< HEAD
 	score = 0;
-=======
-  score = 0;
->>>>>>> 89e39b31ecef3062167e915917601bc0e0e76053
 	playing = 1;
 
 	loadQuestions();

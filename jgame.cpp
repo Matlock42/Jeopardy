@@ -3,14 +3,10 @@
 * 
 * Complete rewrite of version 2.0
 
-<<<<<<< HEAD
-  @author: 	Joel Cranmer <42.joel.cranmer@gmail.com>
-=======
-  @author:   Joel Cranmer <42.joel.cranmer@gmail.com>
->>>>>>> 89e39b31ecef3062167e915917601bc0e0e76053
-  @created:	2013/06/23
-  @modified:	
-  @version:	3
+  @author:      Joel Cranmer <42.joel.cranmer@gmail.com>
+  @created:     2013/06/23
+  @modified:    
+  @version:     3
 
 *
 **********************************/
