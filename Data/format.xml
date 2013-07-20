@@ -1,0 +1,13 @@
+<items>
+	<levels id='100'>
+		<item>
+			<question>This is the question.</question>
+			<answers>
+				<ans>Answer 1</ans>
+				<ans>Answer 2</ans>
+				<ans>Answer 3</ans>
+				<ans correct=TRUE>Answer 4</ans>
+			</answers>
+		</item>
+	<level>
+</items>
