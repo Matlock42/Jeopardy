@@ -13,7 +13,11 @@
 #ifndef jgame_H
 #define jgame_H
 
+<<<<<<< HEAD
 #define gameSize 1	// set to 1 for debuging purposes
+=======
+#define gameSize 1  // set to 1 for debuging purposes
+>>>>>>> 89e39b31ecef3062167e915917601bc0e0e76053
 //#define gameSize 5
 
 class game
