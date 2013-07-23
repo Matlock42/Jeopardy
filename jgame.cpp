@@ -26,7 +26,9 @@ int main()
 		// while game not done continue playing
 		while(jeopardy->playing == 1)
 		{
-
+			//Start by showing the board
+			jeopardy->showBoard();
+			
 		}
 		// when game is finished display the score
 		jeopardy->showScore();

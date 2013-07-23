@@ -14,7 +14,8 @@ game::game()
 {
 	score = 0;
 	playing = 1;
-
+	// Need to find a good place to check if all the questions have been played
+	// and then set playing to 0.
 	loadQuestions();
 }
 
@@ -41,19 +42,21 @@ int game::showBoard(void)
 
 	for(i=0; i<gameSize; i++)	// different rows
 	{
-		for(j=0; j<gameSize; j++)
+		for(j=0; j<gameSize; j++) // go through each catagory
 		{
+			// display empty slot if the question has already been played
 			if(questionSet[j][i].played == 1)
 			{
 				cout << "---\t";
 			}
-			else
+			else	// display the amount the question is worth
 			{
 				cout << "$" << (i+1) << "00\t";	 // disp: $200
 			}
 		}
 		cout << "\n\n";
 	}
+	// Display the current score and prompt for the next question
 	cout << "\t\t Score: " << score << "\n";
 	cout << "Next question: \n";
 	cin >> prompt;
@@ -65,7 +68,7 @@ int game::showScore(void)
 	// display final score;
 }
 
-int game::showQuestin(int prompt)
+int game::showQuestion(int prompt)
 {
 	// split 2 digit prompt into category and price
 	// display the question from the questionSet
