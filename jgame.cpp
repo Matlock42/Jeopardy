@@ -8,10 +8,18 @@
   @modified:    
   @version:     3
 
-*
+* Contains the entry point for the program to execute.
 **********************************/
 
-#include "jgame.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <iostream>
+#include <iomanip>
+#include "jgameClass.h"
+
+using namespace std;
 
 int main()
 {
