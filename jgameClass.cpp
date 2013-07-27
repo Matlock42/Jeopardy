@@ -10,18 +10,30 @@
 
 *
 **********************************/
-game::game()
+#include <iostream>
+#include "jgameClass.h"
+#include "jQuestion.h"
+
+using namespace std;
+
+Game::Game(int aSize)
 {
-	score = 0;
-	playing = 1;
+	this->mScore = 0;
+	this->mPlaying = true;
+	this->mSize = aSize;
+	this->mQuestionSet = new Question**[mSize];
+	for(int lRow = 0; lRow < aSize; lRow++)
+	{
+		this->mQuestionSet[lRow] = new Question*[mSize];
+	}
 	// Need to find a good place to check if all the questions have been played
 	// and then set playing to 0.
 	loadQuestions();
 }
 
-game::~game(){ }
+Game::~Game(){ }
 
-int game::clearScreen(void)
+int Game::clearScreen(void)
 {
 	// 25 new lines
 	int i;
@@ -29,63 +41,63 @@ int game::clearScreen(void)
 	return 0;
 }
 
-int game::showBoard(void)
+int Game::showBoard(void)
 {
 	clearScreen();
 	int i,j;
-	int prompt;
-	for(j=0; j<gameSize; j++)	// print category names
+	int lPrompt;
+	for(j = 0; j < mSize; j++)	// print category names
 	{
-		cout << questionSet[j][1].category << "\t";
+		cout << mQuestionSet[j][0]->category() << "\t";
 	}
 	cout << "\n";
 
-	for(i=0; i<gameSize; i++)	// different rows
+	for(i = 0; i < mSize; i++)	// different rows
 	{
-		for(j=0; j<gameSize; j++) // go through each catagory
+		for(j=0; j < mSize; j++) // go through each category
 		{
 			// display empty slot if the question has already been played
-			if(questionSet[j][i].played == 1)
+			if(mQuestionSet[j][i]->hasBeenPlayed())
 			{
 				cout << "---\t";
 			}
 			else	// display the amount the question is worth
 			{
-				cout << "$" << (i+1) << "00\t";	 // disp: $200
+				cout << "$" << mQuestionSet[j][i]->price();
 			}
 		}
 		cout << "\n\n";
 	}
 	// Display the current score and prompt for the next question
-	cout << "\t\t Score: " << score << "\n";
+	cout << "\t\t Score: " << mScore << "\n";
 	cout << "Next question: \n";
-	cin >> prompt;
-	showQuestion(prompt);
+	cin >> lPrompt;
+	showQuestion(lPrompt);
 }
 
-int game::showScore(void)
+int Game::showScore(void)
 {
 	// display final score;
 }
 
-int game::showQuestion(int prompt)
+int Game::showQuestion(int prompt)
 {
 	// split 2 digit prompt into category and price
 	// display the question from the questionSet
 }
 
-int game::loadQuestions(void)
+bool Game::playing()
+{
+	return mPlaying;
+}
+
+int Game::loadQuestions(void)
 {
 	// this will dynamically load the questions but for testing
 	// purposes the questions will be hardcoded.
-
-	questionSet[0][0].category = "Cat1";
-	questionSet[0][0].price = 100;
-	questionSet[0][0].question = "What...?";
-	questionSet[0][0].a = "Answer a";
-	questionSet[0][0].b = "Answer b";	// correct answer
-	questionSet[0][0].c = "Answer c";
-	questionSet[0][0].d = "Answer d";
-	questionSet[0][0].correct = 2;	// points to answer B
-	questionSet[0][0].played = 0;	// this question has not been played when initalized
+	mQuestionSet[0][0] = new Question("Cat1",100,"What...?", 2);
+	mQuestionSet[0][0]->addAnswer(0, "Answer a");
+	mQuestionSet[0][0]->addAnswer(1, "Answer b");
+	mQuestionSet[0][0]->addAnswer(2, "Answer c");
+	mQuestionSet[0][0]->addAnswer(3, "Answer d");
 }

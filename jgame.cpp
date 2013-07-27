@@ -18,32 +18,38 @@
 #include <iostream>
 #include <iomanip>
 #include "jgameClass.h"
+#include <string>
 
 using namespace std;
 
 int main()
 {
-	char again = "y"; 
-	while ( again == "y" || again == "Y" )
+	bool lAgain = true;
+	string lInput;
+	while ( lAgain )
 	{
 		// start game
-		game * jeopardy = new game();
+		Game * lJeopardy = new Game(1);
 
 		cout << "Welcome to a new game of Jeopardy.\n\n";
 
 		// while game not done continue playing
-		while(jeopardy->playing == 1)
+		while(lJeopardy->playing())
 		{
 			//Start by showing the board
-			jeopardy->showBoard();
+			lJeopardy->showBoard();
 			
 		}
 		// when game is finished display the score
-		jeopardy->showScore();
-		delete jeopardy;
+		lJeopardy->showScore();
+		delete lJeopardy;
 		// Play another game?
 		cout << "Do you want to play again? [y/N] \n";
-		cin >> again;
+		cin >> lInput;
+		if(lInput != "")
+			lAgain = toupper(lInput[0]) == 'Y';
+		else
+			lAgain = false;
 	}
 	return 0;
 }

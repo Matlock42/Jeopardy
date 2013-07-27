@@ -13,30 +13,25 @@
 #ifndef jgame_H
 #define jgame_H
 
-#define gameSize 1	// set to 1 for debuging purposes
-//#define gameSize 5
+class Question;
 
-class game
+class Game
 {
 	public:
-		int playing;
-		game();
-		~game();
+		bool playing(void);
+		Game(int);
+		~Game();
 		int showBoard(void);
 		int showScore(void);
+
 	private:
 		int loadQuestions(void);
 		int showQuestion(int prompt);
 		int clearScreen(void);
-		int score;
-	struct questionSet {
-			string category;// stores category name
-			int price;	// price of the question
-			string question;// stores the question to be displayed
-			string a,b,c,d;	// stores the answers
-			int correct;	// strores number of correct answer
-			int played;	// whether this has been played or not
-		} questionSet[gameSize][gameSize]; 	// 5x5 board size
+		bool mPlaying;
+		int mScore;
+		int mSize;
+	    Question***  mQuestionSet; 	// 5x5 board size
 };
 
 #endif
