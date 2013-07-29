@@ -25,12 +25,12 @@ class Game
 		int showScore(void);
 
 	private:
-		int loadQuestions(void);
-		int showQuestion(int prompt);
-		int clearScreen(void);
-		bool mPlaying;
-		int mScore;
-		int mSize;
+		int loadQuestions(void);	// load questions from xml files in ./Data
+		int showQuestion(int prompt);	// display the question and answer prompt
+		int clearScreen(void);		// clear the screen of text
+		bool mPlaying;				// True-game goes on; False-No more questions
+		int mScore;					// Current score
+		int mSize;					// size of the game board
 	    Question***  mQuestionSet; 	// 5x5 board size
 };
 

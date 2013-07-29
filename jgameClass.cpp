@@ -93,7 +93,8 @@ bool Game::playing()
 
 int Game::loadQuestions(void)
 {
-	// this will dynamically load the questions but for testing
+	// this will dynamically load the questions from ./Data
+	// XML files (using RapidXML) but for testing
 	// purposes the questions will be hardcoded.
 	mQuestionSet[0][0] = new Question("Cat1",100,"What...?", 2);
 	mQuestionSet[0][0]->addAnswer(0, "Answer a");
