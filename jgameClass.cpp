@@ -13,7 +13,9 @@
 #include <iostream>
 #include "jgameClass.h"
 #include "jQuestion.h"
+#include "rapidxml_utils.hpp"
 
+using namespace rapidxml;
 using namespace std;
 
 Game::Game(int aSize)
@@ -101,4 +103,48 @@ int Game::loadQuestions(void)
 	mQuestionSet[0][0]->addAnswer(1, "Answer b");
 	mQuestionSet[0][0]->addAnswer(2, "Answer c");
 	mQuestionSet[0][0]->addAnswer(3, "Answer d");
+	
+	// look in data folder for at least 5 catagory xml documents
+		// does the ./Data folder exist?
+		// Are there at least 5 *.xml files?
+	// load 5 at random
+		// parse each catagory file
+			// is the data tree formatted correctly
+			// are there 5 levels
+			// Is there at least one item per level
+		// load each level
+			// if multiple items in a level, randomly choose one
+		
+		xml_document<> lDoc;
+		xml_node<> * lRoot_node;
+		int lLevelCounter = 100;	// start at $100
+		
+		ifstream lFile ("format.xml");
+		vector<char> buffer((istreambuf_iterator<char>(lFile)), istreambuf_iterator<char>());
+		xml_copy.push_back('\0'); // copy of data created (xml_copy)
+		
+		// Parse the buffer using the xml file parsing library into lDoc
+		lDoc.parse<0>(&buffer[0]);
+		//set the root node
+		lRoot_node = lDoc.first_node("items");
+		// make sure there are the right number of levels
+		if( count_children(lRoot_node) != mSize )
+		{
+			// bad thing are happening
+		}
+		for( xml_node<> * lLevel = rootNode->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
+		{
+			// make sure that the level id matches
+			if( lLevel->first_attribute("id")->value() != lLevelCounter )
+			{
+				// level doesn't match
+				// complain with error/exception
+			}			
+			// count the # or items in the level
+			if( count_children(lLevel) > 1 ) // if more than one item in the level
+			{
+				// pick one at random
+			}
+			// keep going almost there
+		}
 }
