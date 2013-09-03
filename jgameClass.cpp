@@ -13,7 +13,7 @@
 #include <iostream>
 #include "jgameClass.h"
 #include "jQuestion.h"
-#include "rapidxml_utils.hpp"
+#include "RapidXml/rapidxml_utils.hpp"
 
 using namespace rapidxml;
 using namespace std;
@@ -121,7 +121,7 @@ int Game::loadQuestions(void)
 		
 		ifstream lFile ("format.xml");
 		vector<char> buffer((istreambuf_iterator<char>(lFile)), istreambuf_iterator<char>());
-		xml_copy.push_back('\0'); // copy of data created (xml_copy)
+		buffer.push_back('\0'); // copy of data created (xml_copy)
 		
 		// Parse the buffer using the xml file parsing library into lDoc
 		lDoc.parse<0>(&buffer[0]);
@@ -132,10 +132,10 @@ int Game::loadQuestions(void)
 		{
 			// bad thing are happening
 		}
-		for( xml_node<> * lLevel = rootNode->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
+		for( xml_node<> * lLevel = lRoot_node->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
 		{
 			// make sure that the level id matches
-			if( lLevel->first_attribute("id")->value() != lLevelCounter )
+			if( * lLevel->first_attribute("id")->value() != lLevelCounter )
 			{
 				// level doesn't match
 				// complain with error/exception
