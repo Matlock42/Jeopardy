@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <items>
 	<levels id='100'>
 		<item>
@@ -7,8 +7,8 @@
 				<ans>Answer 1</ans>
 				<ans>Answer 2</ans>
 				<ans>Answer 3</ans>
-				<ans correct=TRUE>Answer 4</ans>
+				<ans correct='TRUE'>Answer 4</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 </items>

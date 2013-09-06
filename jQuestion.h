@@ -12,13 +12,17 @@
 class Question {
 
 	public:
-		Question(std::string, int, std::string, int);
+		Question(std::string, int, std::string);
 		~Question();
 		bool addAnswer(int, std::string);
 		bool hasBeenPlayed(void);
 		std::string category(void);
+		int getCorrectAns(void);
 		int price(void);
 		bool play(int);
+		int setCorrectAns(int);
+		int askQuestion(void);
+		int showAnswers(void);
 
 	private:
 		std::string mCategory;// stores category name

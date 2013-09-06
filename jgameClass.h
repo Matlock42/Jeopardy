@@ -26,7 +26,7 @@ class Game
 
 	private:
 		int loadQuestions(void);	// load questions from xml files in ./Data
-		int showQuestion(int prompt);	// display the question and answer prompt
+		bool showQuestion(int prompt);	// display the question and answer prompt
 		int clearScreen(void);		// clear the screen of text
 		bool mPlaying;				// True-game goes on; False-No more questions
 		int mScore;					// Current score

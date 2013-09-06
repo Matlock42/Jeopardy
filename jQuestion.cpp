@@ -5,14 +5,16 @@
  *      Author: Ryan Sutton
  */
 
+#include <iostream>
 #include <string>
 #include "jQuestion.h"
 
-Question::Question(std::string aCat, int aPrice, std::string aQuestion, int aCorrectAns)
+using namespace std;
+
+Question::Question(std::string aCat, int aPrice, std::string aQuestion)
 {
 	this->mCategory = aCat;
 	this->mPrice = aPrice;
-	this->mCorrect = aCorrectAns;
 	this->mQuestion = aQuestion;
 	this->mPlayed = false;
 	for(int i = 0; i < 4; i++)
@@ -50,4 +52,31 @@ std::string Question::category()
 int Question::price()
 {
 	return mPrice;
+}
+
+int Question::askQuestion()
+{
+	cout << this->mQuestion;
+	return 0;
+}
+
+int Question::showAnswers()
+{
+	int i;
+	// There are 4 possible answers loop through them
+	for (i = 0; i < 4; i++)
+	{
+		cout << (i+1) << ". " << this->mAns[i] << "\n";
+	}
+	return 0;
+}
+
+int Question::setCorrectAns(int a)
+{
+	this->mCorrect = a;
+	return 0;
+}
+int Question::getCorrectAns()
+{
+	return this->mCorrect;
 }
