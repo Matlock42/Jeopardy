@@ -218,7 +218,7 @@ int Game::loadQuestions(void)
 		for(int i = 0; i < 4; i++)
 		{
 			//Check if this is the correct answer
-			if( lAnswerNode->first_attribute("correct")->value() == "TRUE" )
+			if( lAnswerNode->first_attribute("correct") != 0 && lAnswerNode->first_attribute("correct")->value() == "TRUE" )
 			{
 				// set the correct answer
 				mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
