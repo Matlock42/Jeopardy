@@ -38,7 +38,8 @@ int main()
 		{
 			//Start by showing the board
 			lJeopardy->showBoard();
-			
+			// updates the status (checks if the game is done)
+			lJeopardy->updateStatus();
 		}
 		// when game is finished display the score
 		lJeopardy->showScore();

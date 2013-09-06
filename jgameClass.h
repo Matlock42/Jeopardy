@@ -23,6 +23,7 @@ class Game
 		~Game();
 		int showBoard(void);
 		int showScore(void);
+		int updateStatus(void);
 
 	private:
 		int loadQuestions(void);	// load questions from xml files in ./Data

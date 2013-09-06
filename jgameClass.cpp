@@ -76,7 +76,7 @@ int Game::showBoard(void)
 	// Display the current score and prompt for the next question
 	cout << "\t\t Score: " << mScore << "\n";
 	cout << "Next question: \n";
-	cin >> lPrompt;
+	cin >> lPrompt; // get user's question selection
 	showQuestion(lPrompt);
 	return 0;
 }
@@ -89,18 +89,18 @@ int Game::showScore(void)
 }
 
 bool Game::showQuestion(int aPrompt)
-{
-	clearScreen();
-	
+{	
 	if( aPrompt == 9000 )
 	{
 		cout << "I'm sorry, Dave. I'm afraid I can't do that.\n";
 		return false;
 	}
 	int lCatagory, lPrice;
-	// split 2 digit prompt into category and price
-	lCatagory = aPrompt / 10 % 10;	// tens digit
-	lPrice = aPrompt % 10;			// ones digit
+	int lPrompt;
+	bool lCorrect;
+	// split 2 digit prompt into category and price (and zero base)
+	lCatagory = (aPrompt / 10 % 10) - 1;	// tens digit
+	lPrice = (aPrompt % 10) - 1;			// ones digit
 	
 	// make sure they are a valid choice
 	if( lCatagory >= 0 && lCatagory < this->mSize && lPrice >= 0 && lPrice < this->mSize)
@@ -124,12 +124,53 @@ bool Game::showQuestion(int aPrompt)
 		cout << "Invalid input: out of bounds.\n";
 		return false;
 	}
+	
+	cout << "What is your answer: \n";
+	// get user's answer
+	cin >> lPrompt;
+	// Play the user's answer
+	lCorrect = mQuestionSet[lCatagory][lPrice]->play(lPrompt);
+	
+	if(lCorrect)
+	{
+		cout << "That is correct!\n";
+		// add to the score
+		mScore += (lPrice * 100);
+	}
+	else
+	{
+		cout << "That is incorrect.\n";
+	}
+	
 	return true;
 }
 
-bool Game::playing()
+bool Game::playing(void)
 {
 	return mPlaying;
+}
+
+int Game::updateStatus(void)
+{
+	bool lDone = true; // assume done
+	// loop through the questionSet and see if they have all been played
+	// for efficency, start with the high dollar/harder questions
+	
+	// loop through rows (bottom to top)
+	for(int i = mSize-1; i >= 0; i--)
+	{
+		// loop through columns
+		for(int j=0; j < mSize; j++)
+		{
+			// sets done to false if a question hasn't been played
+			if( lDone && !mQuestionSet[j][i]->hasBeenPlayed() )
+			{
+				lDone = false;
+			}
+		}
+	}
+	mPlaying = !(lDone);
+	return 0;
 }
 
 int Game::loadQuestions(void)
