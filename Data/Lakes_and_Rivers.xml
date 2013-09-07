@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items>
+	<levels id='100'>
+		<item>
+			<question>She came from France to harbor America's freedom</question>
+			<answers>
+				<ans>What is the Enola Gay?</ans>
+				<ans correct='TRUE'>What is the Statue of Liberty?</ans>
+				<ans>What is the Santa Maria?</ans>
+				<ans>What is the Titanic?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='200'>
+		<item>
+			<question>This is the Scottish word for lake.</question>
+			<answers>
+				<ans>What is a Firth?</ans>
+				<ans>What is a Burn?</ans>
+				<ans>What is a Linne?</ans>
+				<ans correct='TRUE'>What is a Loch?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='300'>
+		<item>
+			<question>American river only 33 miles shorter than the Mississippi.</question>
+			<answers>
+				<ans>What is the Arkansas?</ans>
+				<ans>What is the Colorado?</ans>
+				<ans correct='TRUE'>What is the Missouri?</ans>
+				<ans>What is the Amazon?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='400'>
+		<item>
+			<question>World's largest lake, nearly 5 times as big as Superior.</question>
+			<answers>
+				<ans correct='TRUE'>What is the Caspian Sea?</ans>
+				<ans>What is Lake Baikal?</ans>
+				<ans>What is Lake Tanganyika?</ans>
+				<ans>What is Lake Victoria?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='500'>
+		<item>
+			<question>This lake has an island with a lake with an island.</question>
+			<answers>
+				<ans correct='TRUE'>What is Lake Taal?</ans>
+				<ans>What is Lake Van?</ans>
+				<ans>What is Lake Huron?</ans>
+				<ans>What is Lake Toba?</ans>
+			</answers>
+		</item>
+	</levels>
+</items>

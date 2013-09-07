@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items>
+	<levels id='100'>
+		<item>
+			<question>These common mammals spread the Bubonic plague.</question>
+			<answers>
+				<ans correct='TRUE'>What are Rodents?</ans>
+				<ans>What are Owls?</ans>
+				<ans>What are Canines?</ans>
+				<ans>What are Felines?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='200'>
+		<item>
+			<question>This type of skeleton is reserved almost exclusivly for insects and crustations.</question>
+			<answers>
+				<ans>What is a nanoskeleton?</ans>
+				<ans>What is an endoskeleton?</ans>
+				<ans>What is a superskeleton?</ans>
+				<ans correct='TRUE'>What is an exoskeleton?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='300'>
+		<item>
+			<question>This is the largest fish to have ever lived in the ocean.</question>
+			<answers>
+				<ans correct='TRUE'>What is a Megalodon?</ans>
+				<ans>What is a Potato Grouper?</ans>
+				<ans>What is a Blue Whale?</ans>
+				<ans>What is a Whale Shark?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='400'>
+		<item>
+			<question>Animalia is one kingdom of the total ________ kingdoms of living organisms.</question>
+			<answers>
+				<ans>What is 8?</ans>
+				<ans>What is 4?</ans>
+				<ans correct='TRUE'>What is 7?</ans>
+				<ans>What is 5?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='500'>
+		<item>
+			<question>In many nocternal vertabrets, this is a reflective lining that provides especially good "nightvision".</question>
+			<answers>
+				<ans>What is conjunctiva?</ans>
+				<ans correct='TRUE'>What is tapetum lucidum</ans>
+				<ans>What is macula?</ans>
+				<ans>What is presbyopia?</ans>
+			</answers>
+		</item>
+	</levels>
+</items>

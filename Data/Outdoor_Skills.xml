@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items>
+	<levels id='100'>
+		<item>
+			<question>his it the most used canoe paddle stroke.</question>
+			<answers>
+				<ans correct='TRUE'>What is the J-stroke?</ans>
+				<ans>What is the back paddle?</ans>
+				<ans>What is the Q-stroke?</ans>
+				<ans>What is bailing?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='200'>
+		<item>
+			<question>A monkey fist knot can be used for this.</question>
+			<answers>
+				<ans>What is to tie up your camel?</ans>
+				<ans correct='TRUE'>What is to toss the end of a rope?</ans>
+				<ans>What is to find time?</ans>
+				<ans>What is to beley?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='300'>
+		<item>
+			<question>You can use this instrument to aid you in dead reconing.</question>
+			<answers>
+				<ans>What is a compass?</ans>
+				<ans>What is a sexant?</ans>
+				<ans correct='TRUE'>What is a topographic map?</ans>
+				<ans>What is the moon?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='400'>
+		<item>
+			<question>This is the best trekking pole placement while decending a slope.</question>
+			<answers>
+				<ans>What is placing both poles in front of you?</ans>
+				<ans>What is placing one pole in front and the other behind?</ans>
+				<ans correct='TRUE'>What is placing both poles behind you?</ans>
+				<ans>What is placing both poles in your backpack?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='500'>
+		<item>
+			<question>These three microrganisms are the most common water contaminants.</question>
+			<answers>
+				<ans correct='TRUE'>What is cryptosporidium, protozoa, and bacteria?</ans>
+				<ans>What is bacteria, amoeba, and chloroform?</ans>
+				<ans>What is cryptosporidium, T-4 Virus, and protozoa</ans>
+				<ans>What is bacteria, algea, and amoeba?</ans>
+			</answers>
+		</item>
+	</levels>
+</items>

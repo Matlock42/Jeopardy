@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items>
+	<levels id='100'>
+		<item>
+			<question>This man created the theory of general relativity.</question>
+			<answers>
+				<ans>Who was Newton?</ans>
+				<ans>Who was John Doe?</ans>
+				<ans correct='TRUE'>Who was Einstein?</ans>
+				<ans>Who was Hippocrates?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='200'>
+		<item>
+			<question>This is the most dense element know to man.</question>
+			<answers>
+				<ans>What is a skull?</ans>
+				<ans correct='TRUE'>What is Osmium?</ans>
+				<ans>What is Magnesium?</ans>
+				<ans>What is Tungstan?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='300'>
+		<item>
+			<question>This is the closest extrasolar star.</question>
+			<answers>
+				<ans correct='TRUE'>What is Proxima Centauri?</ans>
+				<ans>What is Vega?</ans>
+				<ans>What is Polaris?</ans>
+				<ans>What is the Sun?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='400'>
+		<item>
+			<question>This is the approximate value for Planck's constant.</question>
+			<answers>
+				<ans>What is 6.02e+23?</ans>
+				<ans>What is 2.99e+8?</ans>
+				<ans correct='TRUE'>What is 6.62e-34?</ans>
+				<ans>What is 6.67e-11?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='500'>
+		<item>
+			<question>In beta decay, these sub-atomic particles are released.</question>
+			<answers>
+				<ans>What is an Electron, Positron, & Quark?</ans>
+				<ans>What is a Proton, Positron, & Neutrino?</ans>
+				<ans>What is an Electron, Proton, & Neutrino?</ans>
+				<ans correct='TRUE'>What is an Electron, Positron, & Neutrino?</ans>
+			</answers>
+		</item>
+	</levels>
+</items>
