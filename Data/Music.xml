@@ -4,7 +4,7 @@
 		<item>
 			<question>This frequency is assigned the letter "A".</question>
 			<answers>
-				<ans correct=TRUE>What is 440 Hz?</ans>
+				<ans correct='TRUE'>What is 440 Hz?</ans>
 				<ans>What is 305 Hz?</ans>
 				<ans>What is 262 Hz?</ans>
 				<ans>What is 591 Hz?</ans>
@@ -14,34 +14,34 @@
 			<question>This is arguably Antonio Vivali's most well know composition.</question>
 			<answers>
 				<ans>What is L'Estro Armonico?</ans>
-				<ans correct=TRUE>What is Le quattro stagioni?</ans>
+				<ans correct='TRUE'>What is Le quattro stagioni?</ans>
 				<ans>What is La stravaganza?</ans>
 				<ans>What is Gloria?</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 	<levels id='200'>
 		<item>
 			<question>There is a _______ step between E and F.</question>
 			<answers>
 				<ans>What is "Double"?</ans>
 				<ans>What is "Whole"?</ans>
-				<ans correct=TRUE>What is "Half"?</ans>
+				<ans correct='TRUE'>What is "Half"?</ans>
 				<ans>What is "Quarter"?</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 	<levels id='300'>
 		<item>
 			<question>This is the clef that Viola music is written on.</question>
 			<answers>
 				<ans>What is the Trebel clef?</ans>
-				<ans correct=TRUE>What is the Alto clef?</ans>
+				<ans correct='TRUE'>What is the Alto clef?</ans>
 				<ans>What is the Tenor clef?</ans>
 				<ans>What is the Bass clef?</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 	<levels id='400'>
 		<item>
 			<question>This man was a composer in the clasical era.</question>
@@ -49,10 +49,10 @@
 				<ans>Who was Johannes Ockeghem?</ans>
 				<ans>Who was Edward Elgar?</ans>
 				<ans>Who was Antonio Vivaldi?</ans>
-				<ans correct=TRUE>Who was Pieter Hellendaal?</ans>
+				<ans correct='TRUE'>Who was Pieter Hellendaal?</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 	<levels id='400'>
 		<item>
 			<question>Instead of using Hertz to measure small amount of differences in frequency, you can use this.</question>
@@ -60,8 +60,8 @@
 				<ans>What is a candela?</ans>
 				<ans>What is a decible?</ans>
 				<ans>What is a cable?</ans>
-				<ans correct=TRUE>What is a cent?</ans>
+				<ans correct='TRUE'>What is a cent?</ans>
 			</answers>
 		</item>
-	<level>
+	</levels>
 </items>
