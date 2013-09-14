@@ -15,9 +15,12 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
+#include <string>		// std::string
+#include <vector>		// std::vector
 #include "jgameClass.h"
 #include "jQuestion.h"
 #include "RapidXml/rapidxml_utils.hpp"
+#include "tinydir/tinydir.h"
 
 using namespace std;
 
@@ -188,6 +191,19 @@ int Game::loadQuestions(void)
 	/* initialize random seed: */
 	srand (time(NULL));
 	
+	vector <string> files;
+	// get list of xml files
+	files = findXML(".Data/");
+	
+	if( files.size() < mSize)
+	{
+		cout << "Unable load game: inadequate categories.";
+		return -1;
+	}
+	
+	// shuffle up the list
+	std::random_shuffle ( files.begin(), files.end() );
+	
 	// look in data folder for at least 5 catagory xml documents
 		// does the ./Data folder exist?
 		// Are there at least 5 *.xml files?
@@ -198,77 +214,131 @@ int Game::loadQuestions(void)
 			// + Is there at least one item per level
 		// - load each level
 			// + if multiple items in a level, randomly choose one
-		
-	rapidxml::file<> lXmlFile("./Data/format.xml");
-	rapidxml::xml_document<> lDoc;
-	
-	int lFileCounter = 1;		// start at 1
-	int lLevelCounter = 1;	// start at $100
-	int lItemCounter;
-	int lChosenItem;
-	int lAns[4] = {0, 1, 2, 3};
-	rapidxml::xml_node<> * lItem;
-	rapidxml::xml_node<> * lAnswerNode;
-	
-	// Parse the buffer using the xml file parsing library into lDoc
-	lDoc.parse<0>(lXmlFile.data());
-	//set the root node
-	rapidxml::xml_node<> * lRoot_node = lDoc.first_node("items");
-	// make sure there are the right number of levels
-	if( rapidxml::count_children(lRoot_node) < mSize )
+	for( int f=0; f<mSize; f++ )
 	{
-		// bad thing are happening
-	}
-	// go through each Level of question (100,200,300,...)
-	for( rapidxml::xml_node<> * lLevel = lRoot_node->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
-	{
-		// make sure that the level id matches
-		if( * lLevel->first_attribute("id")->value() != (lLevelCounter * 100) )
+		rapidxml::file<> lXmlFile("./Data/format.xml");
+		rapidxml::xml_document<> lDoc;
+		
+		int lFileCounter = 1;		// start at 1
+		int lLevelCounter = 1;	// start at $100
+		int lItemCounter;
+		int lChosenItem;
+		int lAns[4] = {0, 1, 2, 3};
+		rapidxml::xml_node<> * lItem;
+		rapidxml::xml_node<> * lAnswerNode;
+		
+		// Parse the buffer using the xml file parsing library into lDoc
+		lDoc.parse<0>(lXmlFile.data());
+		//set the root node
+		rapidxml::xml_node<> * lRoot_node = lDoc.first_node("items");
+		// make sure there are the right number of levels
+		if( rapidxml::count_children(lRoot_node) < mSize )
 		{
-			// level doesn't match
-			// complain with error/exception
+			// bad things are happening
+			cout << "Unable load game: inadequate questions in Data/" << files.at(f) << ".\n";
+			return -1;
 		}
-		
-		// count the # or items in the level
-		//set default to 1
-		lChosenItem = 1;
-		
-		if( rapidxml::count_children(lLevel) > 1 ) // if more than one item in the level
+		// go through each Level of question (100,200,300,...)
+		for( rapidxml::xml_node<> * lLevel = lRoot_node->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
 		{
-			// pick one at random
-			lChosenItem = rand() % rapidxml::count_children(lLevel) + 1;
-		}
-		
-		lItemCounter = 1;
-		lItem = lLevel->first_node("item");
-		
-		// now open the chosen item
-		while(lChosenItem > lItemCounter)
-		{
-			lItem = lItem->next_sibling();
-			lItemCounter ++;
-		}
-		
-		//Have the right item, now extract the question and answers.
-		mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question("FileName",(lLevelCounter * 100), lItem->first_node("question")->value());
-		
-		// mix up the answers
-		random_shuffle(&lAns[0],&lAns[4]);
-		lAnswerNode = lItem->first_node("answers")->first_node("ans");
-		// loop through the answers
-		for(int i = 0; i < 4; i++)
-		{
-			//Check if this is the correct answer
-			if( lAnswerNode->first_attribute("correct") != 0 && lAnswerNode->first_attribute("correct")->value() == "TRUE" )
+			// make sure that the level id matches
+			if( * lLevel->first_attribute("id")->value() != (lLevelCounter * 100) )
 			{
-				// set the correct answer
-				mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
+				// level doesn't match
+				// complain with error/exception
 			}
-			// add the answer to the stack
-			mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->addAnswer(lAns[i], lAnswerNode->value());
-			// go to the next answer exept the last loop
-			if( i < 3 ) lAnswerNode = lAnswerNode->next_sibling();
+			
+			// count the # or items in the level
+			//set default to 1
+			lChosenItem = 1;
+			
+			if( rapidxml::count_children(lLevel) > 1 ) // if more than one item in the level
+			{
+				// pick one at random
+				lChosenItem = rand() % rapidxml::count_children(lLevel) + 1;
+			}
+			
+			lItemCounter = 1;
+			lItem = lLevel->first_node("item");
+			
+			// now open the chosen item
+			while(lChosenItem > lItemCounter)
+			{
+				lItem = lItem->next_sibling();
+				lItemCounter ++;
+			}
+			
+			//Have the right item, now extract the question and answers.
+			mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question("FileName",(lLevelCounter * 100), lItem->first_node("question")->value());
+			
+			// mix up the answers
+			random_shuffle(&lAns[0],&lAns[4]);
+			lAnswerNode = lItem->first_node("answers")->first_node("ans");
+			// loop through the answers
+			for(int i = 0; i < 4; i++)
+			{
+				//Check if this is the correct answer
+				if( lAnswerNode->first_attribute("correct") != 0 && lAnswerNode->first_attribute("correct")->value() == "TRUE" )
+				{
+					// set the correct answer
+					mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
+				}
+				// add the answer to the stack
+				mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->addAnswer(lAns[i], lAnswerNode->value());
+				// go to the next answer exept the last loop
+				if( i < 3 ) lAnswerNode = lAnswerNode->next_sibling();
+			}
 		}
 	}
 	return 0;
+}
+
+vector <string> Game::findXML( const char *path )
+{
+	tinydir_dir dir;
+	string s;
+	vector <string> output;
+	
+	// open the current directory
+	if (tinydir_open(&dir, path) == -1)
+	{
+		cout << "Error opening directory";
+	}
+	
+	while (dir.has_next)
+	{
+		tinydir_file file;
+		// get the file
+		if (tinydir_readfile(&dir, &file) == -1)
+		{
+			cout << "Error getting file";
+		}
+		
+		if (file.is_dir)
+		{
+			// prevent bad things from happening
+			if ( strcmp(file.name, ".") != 0 && strcmp(file.name, "..") != 0 )
+			{
+				// look one directory deeper and append the directory to the filename
+				vector <string> returnedVector = findXML(file.name);
+				for( unsigned j = 0; j<returnedVector.size();j++)
+				{
+					//output.push_back( file.name  + "/" + returnedVector.at(j) );
+					output.push_back( file.name + string("/") + returnedVector.at(j) );
+				}
+			}
+		}
+		else
+		{
+			// print the file's name
+			s = file.name;
+			if ( s.find(".xml",0) != -1 || s.find(".XML",0) != -1 )
+			{
+				output.push_back( file.name );
+			}
+		}
+		// next one
+		tinydir_next(&dir);
+	}
+	return output;
 }

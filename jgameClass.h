@@ -29,6 +29,7 @@ class Game
 		int loadQuestions(void);	// load questions from xml files in ./Data
 		bool showQuestion(int prompt);	// display the question and answer prompt
 		int clearScreen(void);		// clear the screen of text
+		std::vector<std::string> findXML( const char *path ); // return vector of all .xml files in the given directory
 		bool mPlaying;				// True-game goes on; False-No more questions
 		int mScore;					// Current score
 		int mSize;					// size of the game board
