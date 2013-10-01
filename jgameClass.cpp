@@ -178,6 +178,7 @@ int Game::updateStatus(void)
 
 int Game::loadQuestions(void)
 {
+	/*
 	// this will dynamically load the questions from ./Data
 	// XML files (using RapidXML) but for testing
 	// purposes the questions will be hardcoded.
@@ -187,6 +188,7 @@ int Game::loadQuestions(void)
 	mQuestionSet[0][0]->addAnswer(2, "Answer c");
 	mQuestionSet[0][0]->addAnswer(3, "Answer d");
 	mQuestionSet[0][0]->setCorrectAns(2);
+	*/
 	
 	/* initialize random seed: */
 	srand (time(NULL));
@@ -216,7 +218,9 @@ int Game::loadQuestions(void)
 			// + if multiple items in a level, randomly choose one
 	for( int f=0; f<mSize; f++ )
 	{
-		rapidxml::file<> lXmlFile("./Data/format.xml");
+		// string lFileLocation = files.at(f);
+		// rapidxml::file<> lXmlFile(lFileLocation.data());
+		rapidxml::file<> lXmlFile(files.at(f).data());
 		rapidxml::xml_document<> lDoc;
 		
 		int lFileCounter = 1;		// start at 1
@@ -305,7 +309,7 @@ vector <string> Game::findXML( const char *path )
 		cout << "Error opening directory";
 	}
 	
-	while (dir.has_next)
+	while (dir.has_next && dir.n_files > 0)
 	{
 		tinydir_file file;
 		// get the file
@@ -323,16 +327,17 @@ vector <string> Game::findXML( const char *path )
 				vector <string> returnedVector = findXML(file.name);
 				for( unsigned j = 0; j<returnedVector.size();j++)
 				{
-					//output.push_back( file.name  + "/" + returnedVector.at(j) );
+					// add a slash to the string to be printed between the file and folder
 					output.push_back( file.name + string("/") + returnedVector.at(j) );
 				}
 			}
 		}
-		else
+		else // a file
 		{
 			// print the file's name
 			s = file.name;
-			if ( s.find(".xml",0) != -1 || s.find(".XML",0) != -1 )
+			// don't inluced the format file
+			if ( (s.find(".xml",0) != -1 || s.find(".XML",0) != -1) && (s.find("format") == -1) )
 			{
 				output.push_back( file.name );
 			}

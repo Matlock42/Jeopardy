@@ -6,7 +6,8 @@
  */
 
 #include <iostream>
-#include <string>
+#include <string>		// std::string
+#include <vector>		// std::vector
 #include "jQuestion.h"
 
 using namespace std;

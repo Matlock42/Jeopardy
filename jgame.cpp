@@ -17,8 +17,9 @@
 #include <time.h>
 #include <iostream>
 #include <iomanip>
+#include <string>		// std::string
+#include <vector>		// std::vector
 #include "jgameClass.h"
-#include <string>
 
 using namespace std;
 
