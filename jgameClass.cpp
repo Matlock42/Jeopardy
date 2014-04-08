@@ -193,13 +193,13 @@ int Game::loadQuestions(void)
 	/* initialize random seed: */
 	srand (time(NULL));
 	
-	vector <string> files;
+	std::vector <std::string> files;
 	// get list of xml files
-	files = findXML(".Data/");
+	files = findXML(".");
 	
 	if( files.size() < mSize)
 	{
-		cout << "Unable load game: inadequate categories.";
+		cout << "Unable load game: inadequate categories. ("<< files.size() <<")\n";
 		return -1;
 	}
 	
@@ -297,25 +297,25 @@ int Game::loadQuestions(void)
 	return 0;
 }
 
-vector <string> Game::findXML( const char *path )
+std::vector <std::string> Game::findXML ( const char *path)
 {
 	tinydir_dir dir;
-	string s;
-	vector <string> output;
+	std::string s;
+	std::vector <std::string> output;
 	
 	// open the current directory
 	if (tinydir_open(&dir, path) == -1)
 	{
-		cout << "Error opening directory";
+		std::cout << "Error opening directory";
 	}
 	
-	while (dir.has_next && dir.n_files > 0)
+	while (dir.has_next)
 	{
 		tinydir_file file;
 		// get the file
 		if (tinydir_readfile(&dir, &file) == -1)
 		{
-			cout << "Error getting file";
+			std::cout << "Error getting file";
 		}
 		
 		if (file.is_dir)
@@ -324,19 +324,19 @@ vector <string> Game::findXML( const char *path )
 			if ( strcmp(file.name, ".") != 0 && strcmp(file.name, "..") != 0 )
 			{
 				// look one directory deeper and append the directory to the filename
-				vector <string> returnedVector = findXML(file.name);
+				std::vector <std::string> returnedVector = findXML(file.name);
 				for( unsigned j = 0; j<returnedVector.size();j++)
 				{
-					// add a slash to the string to be printed between the file and folder
-					output.push_back( file.name + string("/") + returnedVector.at(j) );
+					//output.push_back( file.name  + "/" + returnedVector.at(j) );
+					output.push_back( file.name + std::string("/") + returnedVector.at(j) );
 				}
 			}
 		}
-		else // a file
+		else
 		{
 			// print the file's name
 			s = file.name;
-			// don't inluced the format file
+			// don't include the format file
 			if ( (s.find(".xml",0) != -1 || s.find(".XML",0) != -1) && (s.find("format") == -1) )
 			{
 				output.push_back( file.name );
