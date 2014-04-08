@@ -88,6 +88,7 @@ int Game::showScore(void)
 {
 	clearScreen();
 	// display final score;
+	cout << "Final Score: " << mScore << "\n";
 	return 0;
 }
 
@@ -281,8 +282,9 @@ int Game::loadQuestions(void)
 			// loop through the answers
 			for(int i = 0; i < 4; i++)
 			{
+				cout << "First Attr: " << lAnswerNode->first_attribute("correct") << "\n";
 				//Check if this is the correct answer
-				if( lAnswerNode->first_attribute("correct") != 0 && lAnswerNode->first_attribute("correct")->value() == "TRUE" )
+				if( lAnswerNode->first_attribute("correct") != 0 )
 				{
 					// set the correct answer
 					mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
