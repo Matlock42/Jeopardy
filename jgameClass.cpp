@@ -229,13 +229,19 @@ int Game::loadQuestions(void)
 		int lItemCounter;
 		int lChosenItem;
 		int lAns[4] = {0, 1, 2, 3};
+
+		rapidxml::xml_node<> * lRoot_node;
+		rapidxml::xml_node<> * lLevel;
 		rapidxml::xml_node<> * lItem;
+		rapidxml::xml_node<> * lQuestion;
+		rapidxml::xml_node<> * lAnswerGroup;
 		rapidxml::xml_node<> * lAnswerNode;
+		rapidxml::xml_attribute<> * lAttr;
 		
 		// Parse the buffer using the xml file parsing library into lDoc
 		lDoc.parse<0>(lXmlFile.data());
 		//set the root node
-		rapidxml::xml_node<> * lRoot_node = lDoc.first_node("items");
+		lRoot_node = lDoc.first_node("items");
 		// make sure there are the right number of levels
 		if( rapidxml::count_children(lRoot_node) < mSize )
 		{
@@ -244,13 +250,15 @@ int Game::loadQuestions(void)
 			return -1;
 		}
 		// go through each Level of question (100,200,300,...)
-		for( rapidxml::xml_node<> * lLevel = lRoot_node->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
+		for( lLevel = lRoot_node->first_node("levels"); lLevel; lLevel = lLevel->next_sibling() )
 		{
+			lAttr = lLevel->first_attribute("id");
 			// make sure that the level id matches
-			if( * lLevel->first_attribute("id")->value() != (lLevelCounter * 100) )
+			if( * lAttr->value() != (lLevelCounter * 100) )
 			{
 				// level doesn't match
 				// complain with error/exception
+				cout << "Unable to load Game: Bad level values. (" << * lLevel->first_attribute("id")->value() << ")\n";
 			}
 			
 			// count the # or items in the level
@@ -274,19 +282,24 @@ int Game::loadQuestions(void)
 			}
 			
 			//Have the right item, now extract the question and answers.
-			mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question("FileName",(lLevelCounter * 100), lItem->first_node("question")->value());
+			lQuestion = lItem->first_node("question");
+			char * lQuestionValue = lQuestion->value();
+			mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question("FileName",(lLevelCounter * 100), lQuestionValue);
 			
 			// mix up the answers
 			random_shuffle(&lAns[0],&lAns[4]);
-			lAnswerNode = lItem->first_node("answers")->first_node("ans");
+			lAnswerGroup = lItem->first_node("answers");
+			lAnswerNode =  lAnswerGroup->first_node("ans");
 			// loop through the answers
 			for(int i = 0; i < 4; i++)
 			{
-				cout << "First Attr: " << lAnswerNode->first_attribute("correct") << "\n";
 				//Check if this is the correct answer
-				if( lAnswerNode->first_attribute("correct") != 0 )
+				lAttr = lAnswerNode->first_attribute("correct");
+				if(lAttr)
 				{
+					char * lAnsCorrect = lAttr->value();
 					// set the correct answer
+					cout << "Answer for [" << (lFileCounter - 1) << "][" << (lLevelCounter - 1) << "] set to " << (i) << ".\n";
 					mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
 				}
 				// add the answer to the stack

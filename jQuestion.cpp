@@ -67,7 +67,7 @@ int Question::showAnswers()
 	// There are 4 possible answers loop through them
 	for (i = 0; i < 4; i++)
 	{
-		cout << (i+1) << ". " << this->mAns[i] << "\n";
+		cout << (i) << ". " << this->mAns[i] << "\n";
 	}
 	return 0;
 }
