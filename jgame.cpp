@@ -30,7 +30,7 @@ int main()
 	while ( lAgain )
 	{
 		// start game
-		Game * lJeopardy = new Game(1);
+		Game * lJeopardy = new Game(2);
 
 		cout << "Welcome to a new game of Jeopardy.\n\n";
 

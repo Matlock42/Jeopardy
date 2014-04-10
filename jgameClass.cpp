@@ -16,6 +16,7 @@
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
 #include <string>		// std::string
+#include <sstream>		// std::sstream
 #include <vector>		// std::vector
 #include "jgameClass.h"
 #include "jQuestion.h"
@@ -71,7 +72,7 @@ int Game::showBoard(void)
 			}
 			else	// display the amount the question is worth
 			{
-				cout << "$" << mQuestionSet[j][i]->price();
+				cout << "$" << mQuestionSet[j][i]->price() << "\t";
 			}
 		}
 		cout << "\n\n";
@@ -139,7 +140,7 @@ bool Game::showQuestion(int aPrompt)
 	{
 		cout << "That is correct!\n";
 		// add to the score
-		mScore += (lPrice * 100);
+		mScore += ((lPrice + 1) * 100);
 	}
 	else
 	{
@@ -223,9 +224,13 @@ int Game::loadQuestions(void)
 		// rapidxml::file<> lXmlFile(lFileLocation.data());
 		rapidxml::file<> lXmlFile(files.at(f).data());
 		rapidxml::xml_document<> lDoc;
+
+		// everything but the first 5 and last 4 charactors
+		string lFileName = files.at(f).substr(5,(files.at(f).length()-5-4));
+		std::cout << "Reading File " << lFileName << "\n";
 		
-		int lFileCounter = 1;		// start at 1
-		int lLevelCounter = 1;	// start at $100
+		int lFileCounter = f + 1;	// start at 1
+		int lLevelCounter = 1;		// start at $100
 		int lItemCounter;
 		int lChosenItem;
 		int lAns[4] = {0, 1, 2, 3};
@@ -254,11 +259,16 @@ int Game::loadQuestions(void)
 		{
 			lAttr = lLevel->first_attribute("id");
 			// make sure that the level id matches
-			if( * lAttr->value() != (lLevelCounter * 100) )
+			if( lAttr )
 			{
-				// level doesn't match
-				// complain with error/exception
-				cout << "Unable to load Game: Bad level values. (" << * lLevel->first_attribute("id")->value() << ")\n";
+				char * lLevelNum = lAttr->value();
+
+				if( * lLevelNum != (lLevelCounter * 100) )
+				{
+					// level doesn't match
+					// complain with error/exception
+					//cout << "Unable to load Game: Bad level values. (" << * lLevelNum << ")(" << lLevelCounter << ")\n";
+				}
 			}
 			
 			// count the # or items in the level
@@ -284,7 +294,7 @@ int Game::loadQuestions(void)
 			//Have the right item, now extract the question and answers.
 			lQuestion = lItem->first_node("question");
 			char * lQuestionValue = lQuestion->value();
-			mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question("FileName",(lLevelCounter * 100), lQuestionValue);
+			mQuestionSet[lFileCounter - 1][lLevelCounter - 1] = new Question(lFileName,(lLevelCounter * 100), lQuestionValue);
 			
 			// mix up the answers
 			random_shuffle(&lAns[0],&lAns[4]);
@@ -307,6 +317,7 @@ int Game::loadQuestions(void)
 				// go to the next answer exept the last loop
 				if( i < 3 ) lAnswerNode = lAnswerNode->next_sibling();
 			}
+			lLevelCounter ++;
 		}
 	}
 	return 0;
