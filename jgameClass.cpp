@@ -53,11 +53,15 @@ int Game::clearScreen(void)
 int Game::showBoard(void)
 {
 	clearScreen();
-	int i,j;
+	int i,j,k;
 	int lPrompt;
+	int * t; // Number of additional tabs to add to make things line up
+	t = new int [mSize];
+
 	for(j = 0; j < mSize; j++)	// print category names
 	{
 		cout << mQuestionSet[j][0]->category() << "\t";
+		t[j] = ((mQuestionSet[j][0]->category().length()) / 8); // each tab takes 8 char spaces in the terminal
 	}
 	cout << "\n";
 
@@ -65,20 +69,26 @@ int Game::showBoard(void)
 	{
 		for(j=0; j < mSize; j++) // go through each category
 		{
+			std::string tabs = "\t"; // tabs between each
+			for(k=0; k < t[j]; k++)
+			{
+				tabs.append("\t");  // Add any additional tabs
+			}
+
 			// display empty slot if the question has already been played
 			if(mQuestionSet[j][i]->hasBeenPlayed())
 			{
-				cout << "----\t";
+				cout << "----" << tabs;
 			}
 			else	// display the amount the question is worth
 			{
-				cout << "$" << mQuestionSet[j][i]->price() << "\t";
+				cout << "$" << mQuestionSet[j][i]->price() << tabs;
 			}
 		}
 		cout << "\n\n";
 	}
 	// Display the current score and prompt for the next question
-	cout << "\t\t Score: " << mScore << "\n";
+	cout << "\t\tScore: " << mScore << "\n";
 	cout << "Next question: \n";
 	cin >> lPrompt; // get user's question selection
 	showQuestion(lPrompt);
@@ -227,7 +237,6 @@ int Game::loadQuestions(void)
 
 		// everything but the first 5 and last 4 charactors
 		string lFileName = files.at(f).substr(5,(files.at(f).length()-5-4));
-		std::cout << "Reading File " << lFileName << "\n";
 		
 		int lFileCounter = f + 1;	// start at 1
 		int lLevelCounter = 1;		// start at $100
@@ -309,7 +318,6 @@ int Game::loadQuestions(void)
 				{
 					char * lAnsCorrect = lAttr->value();
 					// set the correct answer
-					cout << "Answer for [" << (lFileCounter - 1) << "][" << (lLevelCounter - 1) << "] set to " << (i) << ".\n";
 					mQuestionSet[lFileCounter - 1][lLevelCounter - 1]->setCorrectAns(lAns[i]);
 				}
 				// add the answer to the stack
