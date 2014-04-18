@@ -18,6 +18,7 @@
 #include <string>		// std::string
 #include <sstream>		// std::sstream
 #include <vector>		// std::vector
+#include <limits>		// std::numeric_limits
 #include "jgameClass.h"
 #include "jQuestion.h"
 #include "RapidXml/rapidxml_utils.hpp"
@@ -87,8 +88,36 @@ int Game::showBoard(void)
 	}
 	// Display the current score and prompt for the next question
 	cout << "\t\tScore: " << mScore << "\n";
-	cout << "Next question: \n";
-	cin >> lPrompt; // get user's question selection
+	
+	// validate the input
+	bool inputError = false;
+	do
+	{
+		cout << "Next question: \n";
+	    if (cin >> lPrompt) // Sanitize input to an integer
+	    {
+	    	inputError = false;
+	    } 
+	    else
+	    {
+	        cout << "Entered value is not an Integer.\n";
+	        cin.clear();
+	        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	        inputError = true;
+	    }
+		if( lPrompt == 9000 )
+		{
+			cout << "I'm sorry, Dave. I'm afraid I can't do that.\n"; // 2001
+			inputError = true;
+		}
+		else if( lPrompt > (mSize * 11)) // only allow up to the max question number
+		{
+			cout << "We need to go to the crappy town where I'm a hero!\n"; // Firefly
+			inputError = true;
+		}
+
+	} while (inputError);
+	clearScreen();
 	showQuestion(lPrompt);
 	return 0;
 }
@@ -103,19 +132,14 @@ int Game::showScore(void)
 
 bool Game::showQuestion(int aPrompt)
 {	
-	if( aPrompt == 9000 )
-	{
-		cout << "I'm sorry, Dave. I'm afraid I can't do that.\n";
-		return false;
-	}
 	int lCatagory, lPrice;
 	int lPrompt;
 	bool lCorrect;
 	// split 2 digit prompt into category and price (and make base zero)
 	lCatagory = (aPrompt / 10 % 10) - 1;	// tens digit
 	lPrice = (aPrompt % 10) - 1;			// ones digit
-	
-	// make sure they are a valid choice
+
+	// make sure selection is a valid choice
 	if( lCatagory >= 0 && lCatagory < this->mSize && lPrice >= 0 && lPrice < this->mSize)
 	{
 		// make sure it hasn't been played before
