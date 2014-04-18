@@ -35,8 +35,6 @@ Game::Game(int aSize)
 	{
 		this->mQuestionSet[lRow] = new Question*[mSize];
 	}
-	// Need to find a good place to check if all the questions have been played
-	// and then set playing to 0.
 	loadQuestions();
 }
 
@@ -44,9 +42,9 @@ Game::~Game(){ }
 
 int Game::clearScreen(void)
 {
-	// 25 new lines
+	// 2 new lines
 	int i;
-	for(i = 0; i < 25; i++) cout << "\n";
+	for(i = 0; i < 2; i++) cout << "\n";
 	return 0;
 }
 
@@ -113,7 +111,7 @@ bool Game::showQuestion(int aPrompt)
 	int lCatagory, lPrice;
 	int lPrompt;
 	bool lCorrect;
-	// split 2 digit prompt into category and price (and zero base)
+	// split 2 digit prompt into category and price (and make base zero)
 	lCatagory = (aPrompt / 10 % 10) - 1;	// tens digit
 	lPrice = (aPrompt % 10) - 1;			// ones digit
 	
@@ -189,19 +187,7 @@ int Game::updateStatus(void)
 }
 
 int Game::loadQuestions(void)
-{
-	/*
-	// this will dynamically load the questions from ./Data
-	// XML files (using RapidXML) but for testing
-	// purposes the questions will be hardcoded.
-	mQuestionSet[0][0] = new Question("Cat1",100,"This program is not done yet.");
-	mQuestionSet[0][0]->addAnswer(0, "Answer a");
-	mQuestionSet[0][0]->addAnswer(1, "Answer b");
-	mQuestionSet[0][0]->addAnswer(2, "Answer c");
-	mQuestionSet[0][0]->addAnswer(3, "Answer d");
-	mQuestionSet[0][0]->setCorrectAns(2);
-	*/
-	
+{	
 	/* initialize random seed: */
 	srand (time(NULL));
 	
@@ -218,16 +204,7 @@ int Game::loadQuestions(void)
 	// shuffle up the list
 	std::random_shuffle ( files.begin(), files.end() );
 	
-	// look in data folder for at least 5 catagory xml documents
-		// does the ./Data folder exist?
-		// Are there at least 5 *.xml files?
-	// load 5 at random
-		// - parse each catagory file
-			// + is the data tree formatted correctly
-			// + are there 5 levels
-			// + Is there at least one item per level
-		// - load each level
-			// + if multiple items in a level, randomly choose one
+	// For each of the files found, go get some questions (up to the board size)
 	for( int f=0; f<mSize; f++ )
 	{
 		// string lFileLocation = files.at(f);
@@ -280,7 +257,7 @@ int Game::loadQuestions(void)
 				}
 			}
 			
-			// count the # or items in the level
+			// count the # of items in the level
 			//set default to 1
 			lChosenItem = 1;
 			
