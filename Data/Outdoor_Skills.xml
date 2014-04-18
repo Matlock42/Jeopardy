@@ -2,7 +2,7 @@
 <items>
 	<levels id='100'>
 		<item>
-			<question>his it the most used canoe paddle stroke.</question>
+			<question>This it the most used canoe paddle stroke.</question>
 			<answers>
 				<ans correct='TRUE'>What is the J-stroke?</ans>
 				<ans>What is the back paddle?</ans>
