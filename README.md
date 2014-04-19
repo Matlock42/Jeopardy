@@ -1,6 +1,7 @@
 #Jeopardy
 
-Custom designed terminal game with dynamic questions and a modular code layout.
+Custom designed terminal game with dynamic questions and a modular code 
+layout.
 
 ## Credits
 
@@ -26,9 +27,22 @@ on the main prompt.
 
 When the game is over, you will be prompted to play another round.
 
+## Adding Questions/Categories
+
+The questions are dynamically pulled from the XML files in ./Data/ at the time
+of execution. These can be edited, deleted, or added to. The category name is
+the filename (less extension). To aid in the creation of additional categories
+a template file is in the Data directory. Each level of question inside a
+category may have multiple "item"s. The program will sellect one at random.
+
+The minimum requirements are enough categories and questions per category to
+fill the board. Adding more questions will just make each game more unique.
+
 ## Licensing
-*I hate this stuff but apparently it is needed. Basically, you can use it as you
-deem fit, but we are not responsible for anything that may arise out of use.*
+
+*I hate this stuff but apparently it is needed. Basically, you can use it as 
+you deem fit, but we are not responsible for anything that may arise out of
+use.*
 
 Public Domain (Unlicensed)
 
