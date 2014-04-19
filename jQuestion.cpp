@@ -42,7 +42,7 @@ bool Question::hasBeenPlayed()
 bool Question::play(int aAns)
 {
 	mPlayed = true;
-	return aAns == this->mCorrect;
+	return (aAns-1) == this->mCorrect;
 }
 
 std::string Question::category()
@@ -65,9 +65,9 @@ int Question::showAnswers()
 {
 	int i;
 	// There are 4 possible answers loop through them
-	for (i = 0; i < 4; i++)
+	for (i = 1; i <= 4; i++)
 	{
-		cout << (i) << ". " << this->mAns[i] << "\n";
+		cout << (i) << ". " << this->mAns[(i-1)] << "\n";
 	}
 	return 0;
 }
