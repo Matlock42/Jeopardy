@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<items>
+	<levels id='100'>
+		<item>
+			<question>Smallest unit of data.</question>
+			<answers>
+				<ans correct='TRUE'>What is a bit?</ans>
+				<ans>What is a byte?</ans>
+				<ans>What is a word?</ans>
+				<ans>What is a boolean?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='200'>
+		<item>
+			<question>Software that interfaces directly with hardware and applications?</question>
+			<answers>
+				<ans>What is multi-threading?</ans>
+				<ans>What is a driver?</ans>
+				<ans correct='TRUE'>What is an operating system?</ans>
+				<ans>What is a GUI?</ans>
+			</answers>
+		</item>
+		<item>
+			<question>The act of breaking and entering.</question>
+			<answers>
+				<ans>What is port forwarding?</ans>
+				<ans>What is hacking?</ans>
+				<ans>What is man-in-the-middle?</ans>
+				<anscorrect='TRUE'>What is cracking?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='300'>
+		<item>
+			<question>Changing a value or variable of one data type into another.</question>
+			<answers>
+				<ans correct='TRUE'>What is type casting?</ans>
+				<ans>What is variable swapping?</ans>
+				<ans>What is bit inversion?</ans>
+				<ans>What is lossless conversion?</ans>
+			</answers>
+		</item>
+		<item>
+			<question>Another name for machine code.</question>
+			<answers>
+				<ans>What is assembly code?</ans>
+				<ans correct='TRUE'>What is binary code?</ans>
+				<ans>What is Turing code?</ans>
+				<ans>What is compiled code?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='400'>
+		<item>
+			<question>Binary organization based on bit significance.</question>
+			<answers>
+				<ans>What is processor architecture?</ans>
+				<ans correct='TRUE'>What is endian?</ans>
+				<ans>What is internal protocol?</ans>
+				<ans>What is megalithic?</ans>
+			</answers>
+		</item>
+	</levels>
+	<levels id='500'>
+		<item>
+			<question>A set of all normal sets.</question>
+			<answers>
+				<ans>What is Cramer's paradox?</ans>
+				<ans>What is set theory?</ans>
+				<ans>What is the limitation of dimensions?</ans>
+				<ans correct='TRUE'>What is Russell's paradox?</ans>
+			</answers>
+		</item>
+	</levels>
+</items>
