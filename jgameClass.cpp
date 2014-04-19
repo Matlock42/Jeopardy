@@ -90,33 +90,33 @@ int Game::showBoard(void)
 	cout << "\t\tScore: " << mScore << "\n";
 	
 	// validate the input
-	bool inputError = false;
+	bool lInputError = false;
 	do
 	{
 		cout << "Next question: \n";
 	    if (cin >> lPrompt) // Sanitize input to an integer
 	    {
-	    	inputError = false;
+	    	lInputError = false;
 	    } 
 	    else
 	    {
 	        cout << "Entered value is not an Integer.\n";
 	        cin.clear();
 	        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	        inputError = true;
+	        lInputError = true;
 	    }
 		if( lPrompt == 9000 )
 		{
 			cout << "I'm sorry, Dave. I'm afraid I can't do that.\n"; // 2001
-			inputError = true;
+			lInputError = true;
 		}
 		else if( lPrompt > (mSize * 11)) // only allow up to the max question number
 		{
 			cout << "We need to go to the crappy town where I'm a hero!\n"; // Firefly
-			inputError = true;
+			lInputError = true;
 		}
 
-	} while (inputError);
+	} while (lInputError);
 	clearScreen();
 	showQuestion(lPrompt);
 	return 0;
@@ -161,10 +161,31 @@ bool Game::showQuestion(int aPrompt)
 		cout << "Invalid input: out of bounds.\n";
 		return false;
 	}
-	
-	cout << "What is your answer: \n";
-	// get user's answer
-	cin >> lPrompt;
+
+	// validate the input
+	bool lInputError = false;
+	do
+	{
+		cout << "What is your answer: \n";
+	    if (cin >> lPrompt) // Sanitize input to an integer
+	    {
+	    	lInputError = false;
+	    } 
+	    else
+	    {
+	        cout << "Entered value is not an Integer.\n\n";
+	        cin.clear();
+	        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	        lInputError = true;
+	    }
+	    // ensure that the prompt is 1,2,3,4
+	    if (lPrompt > 4 || lPrompt < 1)
+	    {
+	    	cout << "Not a valid answer.\n\n";
+	    	lInputError = true;
+	    }
+	} while (lInputError);
+
 	// Play the user's answer
 	lCorrect = mQuestionSet[lCatagory][lPrice]->play(lPrompt);
 	
