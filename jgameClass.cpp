@@ -115,6 +115,11 @@ int Game::showBoard(void)
 			cout << "We need to go to the crappy town where I'm a hero!\n"; // Firefly
 			lInputError = true;
 		}
+		else if( lPrompt > 9000 )
+		{
+			cout << "It's over 9000!\n"; 
+			lInputError = true;
+		}
 
 	} while (lInputError);
 	clearScreen();
